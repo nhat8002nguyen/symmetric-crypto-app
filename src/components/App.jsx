@@ -11,20 +11,16 @@ function App() {
     key: "",
   });
   const [content, setContent] = useState("");
+  const [outputCipher, setOutputCipher] = useState("");
 
   function handleEncrypt(e) {
     try {
-      const outputCipherText = Encrypt(
-        methodAndKey.cryptoMethod,
-        methodAndKey.key,
-        content
+      setOutputCipher(
+        "ENCRYPTION OUTPUT:  " +
+          Encrypt(methodAndKey.cryptoMethod, methodAndKey.key, content)
       );
 
-      console.log(outputCipherText);
-
-      const dataURI =
-        "data:text/plain;base64," + encodeBase64(outputCipherText);
-      saveAs(dataURI, "undefined.txt");
+      console.log(outputCipher);
     } catch (error) {
       if (
         !methodAndKey.cryptoMethod ||
@@ -41,6 +37,19 @@ function App() {
       Decrypt(methodAndKey.cryptoMethod, methodAndKey.key, content);
     } catch (e) {
       alert(e);
+    }
+  }
+
+  function saveOutputAs() {
+    try {
+      if (outputCipher) {
+        const dataURI = "data:text/plain;base64," + encodeBase64(outputCipher);
+        saveAs(dataURI, "undefined.txt");
+      } else {
+        alert("Output not found.");
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -64,22 +73,15 @@ function App() {
         <hr></hr>
 
         <textarea
-          name="displayInput"
+          name="displayOutput"
           style={{ marginTop: "30px", backgroundColor: "#e6e6e6" }}
-          value={
-            "METHOD:    " +
-            methodAndKey.cryptoMethod +
-            "\n" +
-            "KEY:   " +
-            methodAndKey.key +
-            "\n" +
-            "INPUT:   " +
-            content +
-            "\n"
-          }
-          rows="5"
+          value={outputCipher}
+          rows="4"
           readOnly={true}
         />
+        <button id="action" onClick={saveOutputAs}>
+          <span>saveAs</span>
+        </button>
         <div>
           <button id="action" onClick={handleEncrypt}>
             <span>Encrypt</span>

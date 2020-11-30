@@ -46,7 +46,7 @@ function InputTextOrFile(props) {
           setInputText(e.target.value);
           setUploaded(false);
         }}
-        rows="5"
+        rows="4"
       />
       <div>
         <input type="file" onChange={onFileChange} />
