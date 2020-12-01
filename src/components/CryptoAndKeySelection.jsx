@@ -7,9 +7,9 @@ const CryptoAndKeySelection = (props) => {
   const [confirmed, setConfirmed] = useState(false);
 
   const methodOptions = [
-    { value: "Single Character", label: "Caesar Cipher" },
-    { value: "Permutation", label: "Permutation" },
-    { value: "Multiple", label: "Multiple" },
+    { value: "Caesar Cipher", label: "Caesar Cipher" },
+    { value: "Rail Fence", label: "Rail Fence" },
+    { value: "Multiplication", label: "Multiplication" },
   ];
 
   return (

@@ -40,6 +40,10 @@ body {
   font-size: 1.5rem;
 }
 
+hr {
+  border: 1px solid #f0b030;
+}
+
 .form input {
   box-sizing: border-box;
   background-color: transparent;

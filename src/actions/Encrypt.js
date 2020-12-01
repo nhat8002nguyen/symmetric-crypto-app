@@ -1,26 +1,16 @@
-export default function Encrypt(cryptoMethod, key, text) {
-  if (cryptoMethod === "Single Character") {
-    let result = [];
+import CaesarEncrypt from "./CaesarEncrypt";
+import RailFenceEncrypt from "./RailFenceEncrypt";
 
-    for (let i = 0; i < text.length; i++) {
-      let char = text[i];
-      let newChar;
-      console.log(char);
-      if (char === char.toUpperCase()) {
-        newChar = String.fromCharCode(
-          ((char.charCodeAt(0) + parseInt(key, 10) - 65) % 26) + 65
-        );
-      } else {
-        newChar = String.fromCharCode(
-          ((char.charCodeAt(0) + parseInt(key, 10) - 97) % 26) + 97
-        );
-      }
-
-      result.push(newChar);
-    }
-
-    console.log(result.join(""));
-
-    return result.join("");
+const Encrypt = (cryptoMethod, key, text) => {
+  if (cryptoMethod === "Caesar Cipher") {
+    return CaesarEncrypt(key, text);
+  } else if (cryptoMethod === "Rail Fence") {
+    return RailFenceEncrypt(key, text);
+  } else {
+    // combine 2 method
+    const firstEncrypt = CaesarEncrypt(key, text);
+    return RailFenceEncrypt(key, firstEncrypt);
   }
-}
+};
+
+export default Encrypt;

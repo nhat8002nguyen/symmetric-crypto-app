@@ -72,6 +72,14 @@ function App() {
         />
         <hr></hr>
 
+        <div>
+          <button id="action" onClick={handleEncrypt}>
+            <span>Encrypt</span>
+          </button>
+          <button id="action" onClick={handleDecrypt}>
+            <span>Decrypt</span>
+          </button>
+        </div>
         <textarea
           name="displayOutput"
           style={{ marginTop: "30px", backgroundColor: "#e6e6e6" }}
@@ -82,14 +90,6 @@ function App() {
         <button id="action" onClick={saveOutputAs}>
           <span>saveAs</span>
         </button>
-        <div>
-          <button id="action" onClick={handleEncrypt}>
-            <span>Encrypt</span>
-          </button>
-          <button id="action" onClick={handleDecrypt}>
-            <span>Decrypt</span>
-          </button>
-        </div>
       </div>
     </div>
   );
