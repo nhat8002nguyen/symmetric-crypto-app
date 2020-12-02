@@ -74,11 +74,7 @@ function App() {
           }
         />
         <hr></hr>
-        <InputTextOrFile
-          onUpdate={(type, input) =>
-            setContent(type === "text" ? input : input)
-          }
-        />
+        <InputTextOrFile onUpdate={(input) => setContent(input)} />
         <hr></hr>
         <div>
           <button id="action" onClick={handleEncrypt}>

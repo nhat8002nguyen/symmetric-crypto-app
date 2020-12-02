@@ -19,6 +19,8 @@ function InputTextOrFile(props) {
       reader.readAsText(e.target.files[0]);
     }
 
+    setInputText(selectedFile);
+
     setUploaded(false);
   }
 
@@ -29,12 +31,8 @@ function InputTextOrFile(props) {
     }
 
     setUploaded(true);
-    if (selectedFile) {
-      props.onUpdate("file", selectedFile);
-      setInputText(selectedFile);
-    } else {
-      props.onUpdate("text", inputText);
-    }
+
+    props.onUpdate(inputText);
   }
 
   return (
