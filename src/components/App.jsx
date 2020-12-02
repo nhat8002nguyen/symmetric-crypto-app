@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLoading, Oval } from "@agney/react-loading";
 import CryptoAndKeySelection from "./CryptoAndKeySelection";
 import { saveAs, encodeBase64 } from "@progress/kendo-file-saver";
 import InputTextOrFile from "./InputTextOrFile";
@@ -11,16 +12,18 @@ function App() {
     key: "",
   });
   const [content, setContent] = useState("");
-  const [outputCipher, setOutputCipher] = useState("");
+  const [output, setOutput] = useState("");
 
   function handleEncrypt(e) {
     try {
-      setOutputCipher(
+      setOutput(
         "ENCRYPTION OUTPUT:  " +
-          Encrypt(methodAndKey.cryptoMethod, methodAndKey.key, content)
+          Encrypt(
+            methodAndKey.cryptoMethod,
+            parseInt(methodAndKey.key, 10),
+            content
+          )
       );
-
-      console.log(outputCipher);
     } catch (error) {
       if (
         !methodAndKey.cryptoMethod ||
@@ -34,7 +37,14 @@ function App() {
 
   function handleDecrypt(e) {
     try {
-      Decrypt(methodAndKey.cryptoMethod, methodAndKey.key, content);
+      setOutput(
+        "DECRYPTION OUTPUT:  " +
+          Decrypt(
+            methodAndKey.cryptoMethod,
+            parseInt(methodAndKey.key, 10),
+            content
+          )
+      );
     } catch (e) {
       alert(e);
     }
@@ -42,8 +52,8 @@ function App() {
 
   function saveOutputAs() {
     try {
-      if (outputCipher) {
-        const dataURI = "data:text/plain;base64," + encodeBase64(outputCipher);
+      if (output) {
+        const dataURI = "data:text/plain;base64," + encodeBase64(output);
         saveAs(dataURI, "undefined.txt");
       } else {
         alert("Output not found.");
@@ -71,7 +81,6 @@ function App() {
           }
         />
         <hr></hr>
-
         <div>
           <button id="action" onClick={handleEncrypt}>
             <span>Encrypt</span>
@@ -83,13 +92,18 @@ function App() {
         <textarea
           name="displayOutput"
           style={{ marginTop: "30px", backgroundColor: "#e6e6e6" }}
-          value={outputCipher}
+          value={output}
           rows="4"
           readOnly={true}
         />
-        <button id="action" onClick={saveOutputAs}>
-          <span>saveAs</span>
-        </button>
+        <div>
+          <button id="action" onClick={() => setOutput("")}>
+            <span>Clear</span>
+          </button>
+          <button id="action" onClick={saveOutputAs}>
+            <span>Save As</span>
+          </button>
+        </div>
       </div>
     </div>
   );

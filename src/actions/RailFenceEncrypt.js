@@ -1,3 +1,15 @@
+const RailFenceEach8LetterEncrypt = (key, text) => {
+  let result = [];
+
+  for (let i = 0; i < text.length; i = i + 8) {
+    let aBlock8letter =
+      i + 8 <= text.length ? text.slice(i, i + 8) : text.slice(i, text.length);
+    result.push(RailFenceEncrypt(key, aBlock8letter));
+  }
+
+  return result.join("");
+};
+
 const RailFenceEncrypt = (key, text) => {
   let rail = [];
 
@@ -33,6 +45,4 @@ const RailFenceEncrypt = (key, text) => {
   return result.join("");
 };
 
-console.log(RailFenceEncrypt(3, "GeeksforGeeks"));
-
-export default RailFenceEncrypt;
+export default RailFenceEach8LetterEncrypt;

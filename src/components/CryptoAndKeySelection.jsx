@@ -9,7 +9,7 @@ const CryptoAndKeySelection = (props) => {
   const methodOptions = [
     { value: "Caesar Cipher", label: "Caesar Cipher" },
     { value: "Rail Fence", label: "Rail Fence" },
-    { value: "Multiplication", label: "Multiplication" },
+    { value: "combination", label: "Combination" },
   ];
 
   return (
