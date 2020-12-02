@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 function InputTextOrFile(props) {
   const [inputText, setInputText] = useState("");
-  const [selectedFile, setSelectedFile] = useState(null);
   const [uploaded, setUploaded] = useState(false);
 
   function onFileChange(e) {
@@ -11,7 +10,7 @@ function InputTextOrFile(props) {
     reader.onload = async (e) => {
       const text = e.target.result;
 
-      setSelectedFile(text);
+      setInputText(text);
 
       console.log("text in file: " + text);
     };
@@ -19,13 +18,12 @@ function InputTextOrFile(props) {
       reader.readAsText(e.target.files[0]);
     }
 
-    setInputText(selectedFile);
-
+    e.target.value = null;
     setUploaded(false);
   }
 
   function onClickedUpload() {
-    if (inputText.length === 0 && !selectedFile) {
+    if (inputText.length === 0) {
       alert("wrong!, missing input");
       return false;
     }
