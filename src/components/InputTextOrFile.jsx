@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 
 function InputTextOrFile(props) {
   const [inputText, setInputText] = useState("");
@@ -7,7 +6,19 @@ function InputTextOrFile(props) {
   const [uploaded, setUploaded] = useState(false);
 
   function onFileChange(e) {
-    setSelectedFile(e.target.files[0]);
+    const reader = new FileReader();
+
+    reader.onload = async (e) => {
+      const text = e.target.result;
+
+      setSelectedFile(text);
+
+      console.log("text in file: " + text);
+    };
+    if (e.target.files[0]) {
+      reader.readAsText(e.target.files[0]);
+    }
+
     setUploaded(false);
   }
 
@@ -19,18 +30,8 @@ function InputTextOrFile(props) {
 
     setUploaded(true);
     if (selectedFile) {
-      const formData = new FormData();
-
-      // Update the formData object
-      formData.append("myFile", selectedFile, selectedFile.name);
-
-      // Details of the uploaded file
-      console.log(selectedFile);
-      // Request made to the backend api
-      // Send formData object
-      axios.post("api/uploadfile", formData);
-
-      props.onUpdate("file", selectedFile.name);
+      props.onUpdate("file", selectedFile);
+      setInputText(selectedFile);
     } else {
       props.onUpdate("text", inputText);
     }

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useLoading, Oval } from "@agney/react-loading";
 import CryptoAndKeySelection from "./CryptoAndKeySelection";
 import { saveAs, encodeBase64 } from "@progress/kendo-file-saver";
 import InputTextOrFile from "./InputTextOrFile";
@@ -77,7 +76,7 @@ function App() {
         <hr></hr>
         <InputTextOrFile
           onUpdate={(type, input) =>
-            setContent(type === "text" ? input : "Text File: " + input + ".txt")
+            setContent(type === "text" ? input : input)
           }
         />
         <hr></hr>
