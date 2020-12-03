@@ -1,15 +1,22 @@
 const RailFenceEach8LetterDecrypt = (key, cipher) => {
-  let result = [];
+  let paragraphResults = [];
+  let paragraphs = cipher.split("\n");
 
-  for (let i = 0; i < cipher.length; i = i + 8) {
-    let aBlock8letter =
-      i + 8 <= cipher.length
-        ? cipher.slice(i, i + 8)
-        : cipher.slice(i, cipher.length);
-    result.push(RailFenceDecrypt(key, aBlock8letter));
-  }
+  paragraphs.map((paragraph) => {
+    let paragraphResult = [];
 
-  return result.join("");
+    for (let i = 0; i < paragraph.length; i = i + 8) {
+      let aBlock8letter =
+        i + 8 <= paragraph.length
+          ? paragraph.slice(i, i + 8)
+          : paragraph.slice(i, paragraph.length);
+      paragraphResult.push(RailFenceDecrypt(key, aBlock8letter));
+    }
+
+    paragraphResults.push(paragraphResult.join(""));
+  });
+
+  return paragraphResults.join("\n");
 };
 
 const RailFenceDecrypt = (key, cipher) => {

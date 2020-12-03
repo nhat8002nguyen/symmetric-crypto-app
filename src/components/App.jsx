@@ -16,7 +16,8 @@ function App() {
   function handleEncrypt(e) {
     try {
       setOutput(
-        "ENCRYPTION OUTPUT:  " +
+        "ENCRYPTION OUTPUT:" +
+          "\n" +
           Encrypt(
             methodAndKey.cryptoMethod,
             parseInt(methodAndKey.key, 10),
@@ -37,7 +38,8 @@ function App() {
   function handleDecrypt(e) {
     try {
       setOutput(
-        "DECRYPTION OUTPUT:  " +
+        "DECRYPTION OUTPUT:" +
+          "\n" +
           Decrypt(
             methodAndKey.cryptoMethod,
             parseInt(methodAndKey.key, 10),
@@ -84,13 +86,16 @@ function App() {
             <span>Decrypt</span>
           </button>
         </div>
+
         <textarea
-          name="displayOutput"
+          name="outputPart"
+          id="OP"
           style={{ marginTop: "30px", backgroundColor: "#e6e6e6" }}
           value={output}
           rows="4"
           readOnly={true}
         />
+
         <div>
           <button id="action" onClick={() => setOutput("")}>
             <span>Clear</span>
