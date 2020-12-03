@@ -49,7 +49,7 @@ function InputTextOrFile(props) {
         <input type="file" onChange={onFileChange} />
         <button onClick={onClickedUpload}>
           <span style={{ backgroundColor: uploaded ? "green" : "red" }}>
-            Upload
+            Confirm
           </span>
         </button>
       </div>
