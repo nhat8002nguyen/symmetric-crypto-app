@@ -12,6 +12,34 @@ const CryptoAndKeySelection = (props) => {
     { value: "combination", label: "Combination" },
   ];
 
+  function handleChangeKey(e) {
+    setKey(e.target.value);
+    setConfirmed(false);
+  }
+
+  function handleClick() {
+    const keyValue = parseInt(key, 10);
+    if (cryptoMethod === "Caesar Cipher") {
+      if (keyValue < 0 || keyValue > 25) {
+        alert("Key value should in [0, 25]. ");
+        return false;
+      }
+    } else {
+      if (keyValue < 2 || keyValue > 7) {
+        alert("Key value should in [2, 7]");
+        return false;
+      }
+    }
+
+    if (!cryptoMethod || parseInt(key, 10).toString() !== key) {
+      alert("Method or key is wrong!, please re-enter");
+      return false;
+    }
+
+    props.onUpdate(cryptoMethod, key);
+    setConfirmed(true);
+  }
+
   return (
     <div className="form">
       <div id="select">
@@ -20,6 +48,7 @@ const CryptoAndKeySelection = (props) => {
           options={methodOptions}
           onChange={(e) => {
             setCryptoMethod(e.value);
+            setKey("");
             setConfirmed(false);
           }}
         />
@@ -28,25 +57,15 @@ const CryptoAndKeySelection = (props) => {
       <input
         id="key"
         type="text"
-        placeholder="key"
+        placeholder={
+          cryptoMethod === "Caesar Cipher" ? "key: 0 - 25" : "key: 2 - 7"
+        }
         autoComplete="off"
-        onChange={(e) => {
-          setKey(e.target.value);
-          setConfirmed(false);
-        }}
+        onChange={handleChangeKey}
+        value={key}
       />
 
-      <button
-        onClick={() => {
-          if (!cryptoMethod || parseInt(key, 10).toString() !== key) {
-            alert("Method or key is wrong!, please re-enter");
-            return false;
-          }
-
-          props.onUpdate(cryptoMethod, key);
-          setConfirmed(true);
-        }}
-      >
+      <button onClick={handleClick}>
         <span style={{ backgroundColor: confirmed ? "green" : "red" }}>
           Confirm Method And Key
         </span>

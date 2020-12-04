@@ -2,7 +2,7 @@ const RailFenceEach8LetterDecrypt = (key, cipher) => {
   let paragraphResults = [];
   let paragraphs = cipher.split("\n");
 
-  paragraphs.map((paragraph) => {
+  paragraphs.forEach((paragraph) => {
     let paragraphResult = [];
 
     for (let i = 0; i < paragraph.length; i = i + 8) {
