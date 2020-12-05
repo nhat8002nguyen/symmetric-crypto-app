@@ -1,4 +1,5 @@
 const RailFenceEach8LetterDecrypt = (key, cipher) => {
+  console.log(cipher);
   let paragraphResults = [];
   let paragraphs = cipher.split("\n");
 
